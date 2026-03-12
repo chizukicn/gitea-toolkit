@@ -1,0 +1,38 @@
+{
+  "name": "@gitea-toolkit/mcp",
+  "type": "module",
+  "version": "0.1.0",
+  "private": false,
+  "exports": {
+    ".": {
+      "import": "./dist/mcp.mjs",
+      "require": "./dist/mcp.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/mcp.cjs",
+  "module": "./dist/mcp.mjs",
+  "types": "./dist/mcp.d.cts",
+  "bin": {
+    "gitea-mcp": "./dist/mcp.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint": "eslint --cache -f mo src",
+    "test": "vitest run --coverage --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gitea-toolkit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "tsdown": "^0.21.2",
+    "typescript": "^5.9.3"
+  }
+}

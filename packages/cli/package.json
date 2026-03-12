@@ -1,0 +1,38 @@
+{
+  "name": "@gitea-toolkit/cli",
+  "type": "module",
+  "version": "0.1.0",
+  "private": false,
+  "exports": {
+    ".": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/cli.cjs",
+  "module": "./dist/cli.mjs",
+  "types": "./dist/cli.d.cts",
+  "bin": {
+    "tea": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "run": "tsx src/cli.ts",
+    "lint": "eslint --cache -f mo src",
+    "test": "vitest run --coverage --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gitea-toolkit/core": "workspace:*",
+    "cac": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "tsdown": "^0.21.2",
+    "typescript": "^5.9.3"
+  }
+}

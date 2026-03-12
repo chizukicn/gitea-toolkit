@@ -1,0 +1,50 @@
+{
+  "name": "gitea-toolkit-workspace",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "description": "TypeScript toolkit for Gitea (CLI + SDK + MCP)",
+  "author": "Chizuki <chizukicn@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/chizukicn/gitea-toolkit",
+  "repository": "chizukicn/gitea-toolkit",
+  "bugs": {
+    "url": "https://github.com/chizukicn/gitea-toolkit/issues"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "vitest dev",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint --fix",
+    "prepare": "npx simple-git-hooks",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "up:deps": "taze -r major",
+    "up:polyfill": "nolyfill install"
+  },
+  "devDependencies": {
+    "@curev/eslint-config": "^0.6.2",
+    "@types/node": "^25.4.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "changelogen": "^0.6.2",
+    "eslint": "^10.0.3",
+    "eslint-formatter-mo": "^2.4.1",
+    "lint-staged": "^16.3.3",
+    "nolyfill": "^1.0.44",
+    "simple-git-hooks": "^2.13.1",
+    "vitest": "^4.0.18"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs}": [
+      "eslint --cache --fix"
+    ]
+  }
+}
