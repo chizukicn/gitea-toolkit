@@ -27,12 +27,12 @@
   },
   "dependencies": {
     "@gitea-toolkit/core": "workspace:*",
-    "@modelcontextprotocol/sdk": "^1.27.1",
-    "zod": "^4.3.6"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^25.4.0",
-    "tsdown": "^0.21.2",
+    "tsdown": "^0.22.0",
     "typescript": "^5.9.3"
   }
 }
