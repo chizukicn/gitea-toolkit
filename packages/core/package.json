@@ -2,6 +2,16 @@
   "name": "@gitea-toolkit/core",
   "type": "module",
   "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://github.com/chizukicn/gitea-toolkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chizukicn/gitea-toolkit.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/chizukicn/gitea-toolkit/issues"
+  },
   "sideEffects": false,
   "exports": {
     ".": {

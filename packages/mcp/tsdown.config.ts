@@ -6,5 +6,9 @@ export default defineConfig({
   entry: {
     mcp: "./src/mcp.ts",
   },
-  exports: true,
+  exports: {
+    bin: {
+      "gitea-mcp": "./src/mcp.ts"
+    }
+  }
 });

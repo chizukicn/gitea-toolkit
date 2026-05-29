@@ -3,6 +3,16 @@
   "type": "module",
   "version": "0.1.0",
   "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/chizukicn/gitea-toolkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chizukicn/gitea-toolkit.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/chizukicn/gitea-toolkit/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/mcp.mjs",
