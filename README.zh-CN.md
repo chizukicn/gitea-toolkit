@@ -104,6 +104,14 @@ gitea-mcp
 }
 ```
 
+## Skill
+
+项目内置了 skill，可通过 `skills` 工具安装：
+
+```sh
+npx skills add chizukicn/gitea-toolkit
+```
+
 ## 开发
 
 ```sh

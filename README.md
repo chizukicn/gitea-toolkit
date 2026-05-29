@@ -102,6 +102,14 @@ Example JSON config:
 }
 ```
 
+## Skill
+
+This project ships with a skill that can be installed via the `skills` tool:
+
+```sh
+npx skills add chizukicn/gitea-toolkit
+```
+
 ## Development
 
 ```sh
