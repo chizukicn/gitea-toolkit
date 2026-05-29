@@ -76,12 +76,17 @@ server.registerTool(
       state: z.enum(["open", "closed", "all"]).optional(),
       page: z.number().int().positive().optional(),
       limit: z.number().int().positive().optional(),
+      base_branch: z.string().optional(),
+      sort: z.enum(["oldest", "recentupdate", "recentclose", "leastupdate", "mostcomment", "leastcomment", "priority"]).optional(),
+      milestone: z.number().int().positive().optional(),
+      labels: z.array(z.number().int().positive()).optional(),
+      poster: z.string().optional(),
       login: z.string().optional(),
     },
   },
-  async ({ owner, repo, state, page, limit, login }) => {
+  async ({ owner, repo, state, page, limit, base_branch, sort, milestone, labels, poster, login }) => {
     const client = getClient(login);
-    const pulls = await client.listPulls(owner, repo, { state, page, limit });
+    const pulls = await client.listPulls(owner, repo, { state, page, limit, base_branch, sort, milestone, labels, poster });
     return { content: [{ type: "text", text: JSON.stringify(pulls, null, 2) }] };
   }
 );
@@ -139,6 +144,48 @@ server.registerTool(
     const fmt = (format ?? "diff") as "diff" | "patch";
     const diff = await client.getPullDiff(owner, repo, index, fmt);
     return { content: [{ type: "text", text: diff }] };
+  }
+);
+
+server.registerTool(
+  "pulls.create",
+  {
+    description: "Create a pull request",
+    inputSchema: {
+      owner: z.string(),
+      repo: z.string(),
+      title: z.string(),
+      head: z.string(),
+      base: z.string().default("main"),
+      body: z.string().optional(),
+      assignee: z.string().optional(),
+      assignees: z.array(z.string()).optional(),
+      reviewers: z.array(z.string()).optional(),
+      team_reviewers: z.array(z.string()).optional(),
+      labels: z.array(z.number()).optional(),
+      milestone: z.number().optional(),
+      due_date: z.string().optional(),
+      allow_maintainer_edit: z.boolean().optional(),
+      login: z.string().optional(),
+    },
+  },
+  async ({ owner, repo, title, head, base, body, assignee, assignees, reviewers, team_reviewers, labels, milestone, due_date, allow_maintainer_edit, login }) => {
+    const client = getClient(login);
+    const pr = await client.createPull(owner, repo, {
+      title,
+      head,
+      base,
+      body,
+      assignee,
+      assignees,
+      reviewers,
+      team_reviewers,
+      labels,
+      milestone,
+      due_date,
+      allow_maintainer_edit,
+    });
+    return { content: [{ type: "text", text: JSON.stringify(pr, null, 2) }] };
   }
 );
 
