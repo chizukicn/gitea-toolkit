@@ -1,4 +1,4 @@
-export type { CreatePullOptions, ListPullsOptions, LoginOptions } from "./client";
+export type { CreatePullOptions, LoginOptions } from "./client";
 export { createPullRequest, GiteaClient } from "./client";
 export type { ConfigStore, Login } from "./config";
 export { MemoryConfigStore } from "./config";

@@ -95,36 +95,19 @@ export async function getIssue(
   return request<Issue>(login, "GET", `/repos/${owner}/${repo}/issues/${index}`);
 }
 
-export interface ListPullsOptions {
-  state?: "open" | "closed" | "all";
-  page?: number;
-  limit?: number;
-  base_branch?: string;
-  sort?: "oldest" | "recentupdate" | "recentclose" | "leastupdate" | "mostcomment" | "leastcomment" | "priority";
-  milestone?: number;
-  labels?: number[];
-  poster?: string;
-}
-
 export async function listRepoPulls(
   login: Login,
   owner: string,
   repo: string,
-  opts?: ListPullsOptions
+  opts?: { state?: "open" | "closed" | "all"; page?: number; limit?: number }
 ): Promise<PullRequest[]> {
   const state = opts?.state ?? "open";
-  const searchParams: Record<string, string | number> = {
-    state,
-    page: opts?.page ?? 1,
-    limit: opts?.limit ?? 30,
-  };
-  if (opts?.base_branch) searchParams["base_branch"] = opts.base_branch;
-  if (opts?.sort) searchParams["sort"] = opts.sort;
-  if (opts?.milestone !== undefined) searchParams["milestone"] = opts.milestone;
-  if (opts?.labels?.length) searchParams["labels"] = opts.labels.join(",");
-  if (opts?.poster) searchParams["poster"] = opts.poster;
   return request<PullRequest[]>(login, "GET", `/repos/${owner}/${repo}/pulls`, {
-    searchParams,
+    searchParams: {
+      state,
+      page: opts?.page ?? 1,
+      limit: opts?.limit ?? 30,
+    },
   });
 }
 
@@ -267,7 +250,7 @@ export class GiteaClient {
   async listPulls(
     owner: string,
     repo: string,
-    opts?: ListPullsOptions
+    opts?: { state?: "open" | "closed" | "all"; page?: number; limit?: number }
   ): Promise<PullRequest[]> {
     return listRepoPulls(this.requireLogin(), owner, repo, opts);
   }

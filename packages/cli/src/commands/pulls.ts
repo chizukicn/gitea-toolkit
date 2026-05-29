@@ -61,11 +61,6 @@ export function registerPullsCommands(cli: CAC, store: ConfigStore) {
     .option("--state <state>", "State: open | closed | all", { default: "open" })
     .option("--page <n>", "Page number", { default: "1" })
     .option("--limit <n>", "Items per page", { default: "30" })
-    .option("--base-branch <branch>", "Filter by target base branch")
-    .option("--sort <sort>", "Sort: oldest | recentupdate | recentclose | leastupdate | mostcomment | leastcomment | priority")
-    .option("--milestone <id>", "Milestone ID (filter for list, set for create)")
-    .option("--labels <ids>", "Label IDs (comma-separated; filter for list, set for create)")
-    .option("--poster <user>", "Filter by pull request author")
     // detail options
     .option("--files", "Show changed files for a pull request (requires index)")
     .option("--diff", "Show unified diff for the pull request")
@@ -79,6 +74,8 @@ export function registerPullsCommands(cli: CAC, store: ConfigStore) {
     .option("--assignees <users>", "Comma-separated assignee usernames")
     .option("--reviewers <users>", "Comma-separated reviewer usernames")
     .option("--team-reviewers <teams>", "Comma-separated team reviewer names")
+    .option("--labels <ids>", "Comma-separated label IDs")
+    .option("--milestone <id>", "Milestone ID")
     .option("--due-date <date>", "Deadline (ISO 8601 date-time)")
     .option("--allow-maintainer-edit", "Allow maintainers to edit the pull request")
     .action(async (action: string | undefined, options: Record<string, string>) => {
@@ -167,11 +164,6 @@ export function registerPullsCommands(cli: CAC, store: ConfigStore) {
         state,
         page,
         limit,
-        base_branch: options["base-branch"],
-        sort: options.sort,
-        milestone: options.milestone ? Number(options.milestone) : undefined,
-        labels: options.labels ? splitComma(options.labels).map(Number) : undefined,
-        poster: options.poster,
       });
       if (output === "json") {
         console.log(JSON.stringify(pulls, null, 2));

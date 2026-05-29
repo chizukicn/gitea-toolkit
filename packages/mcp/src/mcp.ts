@@ -76,17 +76,12 @@ server.registerTool(
       state: z.enum(["open", "closed", "all"]).optional(),
       page: z.number().int().positive().optional(),
       limit: z.number().int().positive().optional(),
-      base_branch: z.string().optional(),
-      sort: z.enum(["oldest", "recentupdate", "recentclose", "leastupdate", "mostcomment", "leastcomment", "priority"]).optional(),
-      milestone: z.number().int().positive().optional(),
-      labels: z.array(z.number().int().positive()).optional(),
-      poster: z.string().optional(),
       login: z.string().optional(),
     },
   },
-  async ({ owner, repo, state, page, limit, base_branch, sort, milestone, labels, poster, login }) => {
+  async ({ owner, repo, state, page, limit, login }) => {
     const client = getClient(login);
-    const pulls = await client.listPulls(owner, repo, { state, page, limit, base_branch, sort, milestone, labels, poster });
+    const pulls = await client.listPulls(owner, repo, { state, page, limit });
     return { content: [{ type: "text", text: JSON.stringify(pulls, null, 2) }] };
   }
 );
