@@ -37,9 +37,9 @@
     "js-yaml": "^4.1.1"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^25.9.1",
-    "tsdown": "^0.22.1",
-    "typescript": "^6.0.3"
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "25.9.1",
+    "tsdown": "0.22.1",
+    "typescript": "6.0.3"
   }
 }
