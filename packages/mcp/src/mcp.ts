@@ -143,6 +143,48 @@ server.registerTool(
 );
 
 server.registerTool(
+  "pulls.create",
+  {
+    description: "Create a pull request",
+    inputSchema: {
+      owner: z.string(),
+      repo: z.string(),
+      title: z.string(),
+      head: z.string(),
+      base: z.string().default("main"),
+      body: z.string().optional(),
+      assignee: z.string().optional(),
+      assignees: z.array(z.string()).optional(),
+      reviewers: z.array(z.string()).optional(),
+      team_reviewers: z.array(z.string()).optional(),
+      labels: z.array(z.number()).optional(),
+      milestone: z.number().optional(),
+      due_date: z.string().optional(),
+      allow_maintainer_edit: z.boolean().optional(),
+      login: z.string().optional(),
+    },
+  },
+  async ({ owner, repo, title, head, base, body, assignee, assignees, reviewers, team_reviewers, labels, milestone, due_date, allow_maintainer_edit, login }) => {
+    const client = getClient(login);
+    const pr = await client.createPull(owner, repo, {
+      title,
+      head,
+      base,
+      body,
+      assignee,
+      assignees,
+      reviewers,
+      team_reviewers,
+      labels,
+      milestone,
+      due_date,
+      allow_maintainer_edit,
+    });
+    return { content: [{ type: "text", text: JSON.stringify(pr, null, 2) }] };
+  }
+);
+
+server.registerTool(
   "open.url",
   {
     description: "Generate a web URL (repo/issue/pull/profile) without opening a browser",

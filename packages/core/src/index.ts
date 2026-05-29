@@ -1,5 +1,5 @@
-export type { LoginOptions } from "./client";
-export { GiteaClient } from "./client";
+export type { CreatePullOptions, LoginOptions } from "./client";
+export { createPullRequest, GiteaClient } from "./client";
 export type { ConfigStore, Login } from "./config";
 export { MemoryConfigStore } from "./config";
 export type { ResolveOptions, TeaContext } from "./context";

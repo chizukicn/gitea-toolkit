@@ -129,6 +129,45 @@ export async function listRepoPullFiles(
   return request<PullFile[]>(login, "GET", `/repos/${owner}/${repo}/pulls/${index}/files`);
 }
 
+export interface CreatePullOptions {
+  title: string;
+  head: string;
+  base: string;
+  body?: string;
+  assignee?: string;
+  assignees?: string[];
+  labels?: number[];
+  milestone?: number;
+  due_date?: string;
+  allow_maintainer_edit?: boolean;
+  reviewers?: string[];
+  team_reviewers?: string[];
+}
+
+export async function createPullRequest(
+  login: Login,
+  owner: string,
+  repo: string,
+  opts: CreatePullOptions
+): Promise<PullRequest> {
+  return request<PullRequest>(login, "POST", `/repos/${owner}/${repo}/pulls`, {
+    body: {
+      title: opts.title,
+      head: opts.head,
+      base: opts.base,
+      body: opts.body,
+      assignee: opts.assignee,
+      assignees: opts.assignees,
+      labels: opts.labels,
+      milestone: opts.milestone,
+      due_date: opts.due_date,
+      allow_maintainer_edit: opts.allow_maintainer_edit,
+      reviewers: opts.reviewers,
+      team_reviewers: opts.team_reviewers,
+    },
+  });
+}
+
 export async function getPullDiff(
   login: Login,
   owner: string,
@@ -222,6 +261,14 @@ export class GiteaClient {
 
   async listPullFiles(owner: string, repo: string, index: number): Promise<PullFile[]> {
     return listRepoPullFiles(this.requireLogin(), owner, repo, index);
+  }
+
+  async createPull(
+    owner: string,
+    repo: string,
+    opts: CreatePullOptions
+  ): Promise<PullRequest> {
+    return createPullRequest(this.requireLogin(), owner, repo, opts);
   }
 
   async getPullDiff(
