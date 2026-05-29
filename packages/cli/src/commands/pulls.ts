@@ -1,7 +1,7 @@
 import type { ConfigStore, PullFile, PullRequest } from "@gitea-toolkit/core";
 import type { CAC } from "cac";
-import process from "node:process";
 import { execSync } from "node:child_process";
+import process from "node:process";
 import { prIndex, requireContext } from "@gitea-toolkit/core";
 
 function gitBranch(): string {
@@ -44,7 +44,9 @@ function formatPullFiles(files: PullFile[], output: string) {
 }
 
 function splitComma(value: string): string[] {
-  if (!value) return [];
+  if (!value) {
+    return [];
+  }
   return value.split(",").map((s) => s.trim()).filter(Boolean);
 }
 
@@ -79,6 +81,8 @@ export function registerPullsCommands(cli: CAC, store: ConfigStore) {
     .option("--assignees <users>", "Comma-separated assignee usernames")
     .option("--reviewers <users>", "Comma-separated reviewer usernames")
     .option("--team-reviewers <teams>", "Comma-separated team reviewer names")
+    .option("--labels <ids>", "Comma-separated label IDs")
+    .option("--milestone <id>", "Milestone ID")
     .option("--due-date <date>", "Deadline (ISO 8601 date-time)")
     .option("--allow-maintainer-edit", "Allow maintainers to edit the pull request")
     .action(async (action: string | undefined, options: Record<string, string>) => {

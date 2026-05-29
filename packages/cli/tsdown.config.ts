@@ -6,5 +6,9 @@ export default defineConfig({
   entry: {
     cli: "./src/cli.ts",
   },
-  exports: true,
+  exports: {
+    bin: {
+      tea: "./src/cli.ts"
+    }
+  },
 });
