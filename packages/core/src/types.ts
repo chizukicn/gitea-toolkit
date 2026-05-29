@@ -55,6 +55,7 @@ export interface PullRequest {
   user?: User;
   labels?: Array<{ name: string; color?: string }>;
   assignees?: User[];
+  milestone?: { title: string };
   base?: { ref: string };
   head?: { ref: string; sha: string };
   mergeable?: boolean;

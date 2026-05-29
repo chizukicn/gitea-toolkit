@@ -99,7 +99,7 @@ export interface ListPullsOptions {
   state?: "open" | "closed" | "all";
   page?: number;
   limit?: number;
-  base_branch?: string;
+  base?: string;
   sort?: "oldest" | "recentupdate" | "recentclose" | "leastupdate" | "mostcomment" | "leastcomment" | "priority";
   milestone?: number;
   labels?: number[];
@@ -118,7 +118,7 @@ export async function listRepoPulls(
     page: opts?.page ?? 1,
     limit: opts?.limit ?? 30,
   };
-  if (opts?.base_branch) searchParams["base_branch"] = opts.base_branch;
+  if (opts?.base) searchParams["base_branch"] = opts.base;
   if (opts?.sort) searchParams["sort"] = opts.sort;
   if (opts?.milestone !== undefined) searchParams["milestone"] = opts.milestone;
   if (opts?.labels?.length) searchParams["labels"] = opts.labels.join(",");
