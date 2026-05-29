@@ -31,6 +31,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "prepublishOnly": "pnpm build",
     "lint": "eslint --cache -f mo src",
     "test": "vitest run --coverage --passWithNoTests",
     "typecheck": "tsc --noEmit"
