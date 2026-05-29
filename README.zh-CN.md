@@ -104,17 +104,13 @@ gitea-mcp
 }
 ```
 
-## Claude Code Skill
+## Skill
 
-项目内置了 OMC skill，让 Claude Code 能直接使用 `tea` CLI 和 `gitea-mcp` 工具。
-
-### 安装
+项目内置了 skill，可通过 `skills` 工具安装：
 
 ```sh
 npx skills add chizukicn/gitea-toolkit
 ```
-
-安装后 Claude Code 会在需要操作 Gitea 仓库时自动加载此 skill。
 
 ## 开发
 
