@@ -95,19 +95,36 @@ export async function getIssue(
   return request<Issue>(login, "GET", `/repos/${owner}/${repo}/issues/${index}`);
 }
 
+export interface ListPullsOptions {
+  state?: "open" | "closed" | "all";
+  page?: number;
+  limit?: number;
+  base_branch?: string;
+  sort?: "oldest" | "recentupdate" | "recentclose" | "leastupdate" | "mostcomment" | "leastcomment" | "priority";
+  milestone?: number;
+  labels?: number[];
+  poster?: string;
+}
+
 export async function listRepoPulls(
   login: Login,
   owner: string,
   repo: string,
-  opts?: { state?: "open" | "closed" | "all"; page?: number; limit?: number }
+  opts?: ListPullsOptions
 ): Promise<PullRequest[]> {
   const state = opts?.state ?? "open";
+  const searchParams: Record<string, string | number> = {
+    state,
+    page: opts?.page ?? 1,
+    limit: opts?.limit ?? 30,
+  };
+  if (opts?.base_branch) searchParams["base_branch"] = opts.base_branch;
+  if (opts?.sort) searchParams["sort"] = opts.sort;
+  if (opts?.milestone !== undefined) searchParams["milestone"] = opts.milestone;
+  if (opts?.labels?.length) searchParams["labels"] = opts.labels.join(",");
+  if (opts?.poster) searchParams["poster"] = opts.poster;
   return request<PullRequest[]>(login, "GET", `/repos/${owner}/${repo}/pulls`, {
-    searchParams: {
-      state,
-      page: opts?.page ?? 1,
-      limit: opts?.limit ?? 30,
-    },
+    searchParams,
   });
 }
 
@@ -127,6 +144,45 @@ export async function listRepoPullFiles(
   index: number
 ): Promise<PullFile[]> {
   return request<PullFile[]>(login, "GET", `/repos/${owner}/${repo}/pulls/${index}/files`);
+}
+
+export interface CreatePullOptions {
+  title: string;
+  head: string;
+  base: string;
+  body?: string;
+  assignee?: string;
+  assignees?: string[];
+  labels?: number[];
+  milestone?: number;
+  due_date?: string;
+  allow_maintainer_edit?: boolean;
+  reviewers?: string[];
+  team_reviewers?: string[];
+}
+
+export async function createPullRequest(
+  login: Login,
+  owner: string,
+  repo: string,
+  opts: CreatePullOptions
+): Promise<PullRequest> {
+  return request<PullRequest>(login, "POST", `/repos/${owner}/${repo}/pulls`, {
+    body: {
+      title: opts.title,
+      head: opts.head,
+      base: opts.base,
+      body: opts.body,
+      assignee: opts.assignee,
+      assignees: opts.assignees,
+      labels: opts.labels,
+      milestone: opts.milestone,
+      due_date: opts.due_date,
+      allow_maintainer_edit: opts.allow_maintainer_edit,
+      reviewers: opts.reviewers,
+      team_reviewers: opts.team_reviewers,
+    },
+  });
 }
 
 export async function getPullDiff(
@@ -211,7 +267,7 @@ export class GiteaClient {
   async listPulls(
     owner: string,
     repo: string,
-    opts?: { state?: "open" | "closed" | "all"; page?: number; limit?: number }
+    opts?: ListPullsOptions
   ): Promise<PullRequest[]> {
     return listRepoPulls(this.requireLogin(), owner, repo, opts);
   }
@@ -222,6 +278,14 @@ export class GiteaClient {
 
   async listPullFiles(owner: string, repo: string, index: number): Promise<PullFile[]> {
     return listRepoPullFiles(this.requireLogin(), owner, repo, index);
+  }
+
+  async createPull(
+    owner: string,
+    repo: string,
+    opts: CreatePullOptions
+  ): Promise<PullRequest> {
+    return createPullRequest(this.requireLogin(), owner, repo, opts);
   }
 
   async getPullDiff(
