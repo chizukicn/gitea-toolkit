@@ -102,6 +102,18 @@ Example JSON config:
 }
 ```
 
+## Claude Code Skill
+
+This project ships with an OMC skill that teaches Claude Code how to use the `tea` CLI and `gitea-mcp` tools.
+
+### Install
+
+```sh
+npx skills add chizukicn/gitea-toolkit
+```
+
+Once installed, Claude Code will auto-load this skill when interacting with Gitea repositories.
+
 ## Development
 
 ```sh
