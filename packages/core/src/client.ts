@@ -54,8 +54,8 @@ async function request<T>(
     const requestedUrl = url.toString();
     let hint = "";
     if (res.status === 404) {
-      hint =
-        "\nTip: If Gitea runs at a subpath (e.g. https://gitea.com/gitea), set that full URL in config (tea login). Otherwise check repo owner/name.";
+      hint
+        = "\nTip: If Gitea runs at a subpath (e.g. https://gitea.com/gitea), set that full URL in config (tea login). Otherwise check repo owner/name.";
     }
     throw new Error(`Gitea API ${res.status}: ${text || res.statusText}\n  Requested: ${requestedUrl}${hint}`);
   }
@@ -151,8 +151,8 @@ export async function getPullDiff(
     const requestedUrl = url.toString();
     let hint = "";
     if (res.status === 404) {
-      hint =
-        "\nTip: If Gitea runs at a subpath (e.g. https://gitea.com/gitea), set that full URL in config (tea login). Otherwise check repo owner/name.";
+      hint
+        = "\nTip: If Gitea runs at a subpath (e.g. https://gitea.com/gitea), set that full URL in config (tea login). Otherwise check repo owner/name.";
     }
     throw new Error(`Gitea API ${res.status}: ${text || res.statusText}\n  Requested: ${requestedUrl}${hint}`);
   }
