@@ -28,17 +28,17 @@
     "up:polyfill": "nolyfill install"
   },
   "devDependencies": {
-    "@curev/eslint-config": "^0.6.2",
-    "@types/node": "^25.9.1",
-    "@vitest/coverage-v8": "^4.1.7",
-    "changelogen": "^0.6.2",
-    "eslint": "^10.4.0",
-    "eslint-formatter-mo": "^2.4.1",
-    "lint-staged": "^17.0.5",
-    "nolyfill": "^1.0.44",
-    "simple-git-hooks": "^2.13.1",
-    "taze": "^19.14.1",
-    "vitest": "^4.1.7"
+    "@curev/eslint-config": "0.6.2",
+    "@types/node": "25.9.1",
+    "@vitest/coverage-v8": "4.1.7",
+    "changelogen": "0.6.2",
+    "eslint": "10.4.0",
+    "eslint-formatter-mo": "2.4.1",
+    "lint-staged": "17.0.5",
+    "nolyfill": "1.0.44",
+    "simple-git-hooks": "2.13.1",
+    "taze": "19.14.1",
+    "vitest": "4.1.7"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
