@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.24.0",
   "description": "TypeScript toolkit for Gitea (CLI + SDK + MCP)",
   "author": "Chizuki <chizukicn@outlook.com>",
   "license": "MIT",
@@ -29,16 +29,16 @@
   },
   "devDependencies": {
     "@curev/eslint-config": "^0.6.2",
-    "@types/node": "^25.9.1",
-    "@vitest/coverage-v8": "^4.1.7",
+    "@types/node": "^25.9.5",
+    "@vitest/coverage-v8": "^4.1.11",
     "changelogen": "^0.6.2",
-    "eslint": "^10.4.0",
+    "eslint": "^10.9.1",
     "eslint-formatter-mo": "^2.4.1",
-    "lint-staged": "^17.0.5",
+    "lint-staged": "^17.4.1",
     "nolyfill": "^1.0.44",
-    "simple-git-hooks": "^2.13.1",
-    "taze": "^19.14.1",
-    "vitest": "^4.1.7"
+    "simple-git-hooks": "^2.14.0",
+    "taze": "^19.17.2",
+    "vitest": "^4.1.11"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

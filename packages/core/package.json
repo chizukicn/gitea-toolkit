@@ -34,12 +34,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "js-yaml": "^4.1.1"
+    "js-yaml": "^4.3.2"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^25.9.1",
-    "tsdown": "^0.22.1",
+    "@types/node": "^25.9.5",
+    "tsdown": "^0.22.14",
     "typescript": "^6.0.3"
   }
 }
