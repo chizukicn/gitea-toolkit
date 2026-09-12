@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@12.4.0",
   "description": "TypeScript toolkit for Gitea (CLI + SDK + MCP)",
   "author": "Chizuki <chizukicn@outlook.com>",
   "license": "MIT",
