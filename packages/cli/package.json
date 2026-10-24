@@ -39,11 +39,11 @@
   },
   "dependencies": {
     "@gitea-toolkit/core": "workspace:*",
-    "cac": "^7.0.0"
+    "cac": "^7.1.0"
   },
   "devDependencies": {
-    "@types/node": "^25.9.1",
-    "tsdown": "^0.22.1",
+    "@types/node": "^25.9.9",
+    "tsdown": "^0.23.1",
     "typescript": "^6.0.3"
   }
 }
