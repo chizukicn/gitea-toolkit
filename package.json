@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@curev/eslint-config": "^0.6.2",
-    "@types/node": "^25.9.1",
+    "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^4.1.7",
     "changelogen": "^0.6.2",
     "eslint": "^10.4.0",
